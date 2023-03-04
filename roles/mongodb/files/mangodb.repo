@@ -1,21 +1,5 @@
-- name: Setup MongoDB YUM repo file
-  ansible.builtin.copy:
-    src: mongodb.repo
-    dest: /etc/yum.repos.d/mongo.repo
-
-- name: Install MongoDB
-  ansible.builtin.yum:
-    name: mongodb-org
-    state: installed
-
-- name: Update MongoDB Listen Address
-  ansible.builtin.replace:
-    path: /etc/mongod.conf
-    regexp: '127.0.0.1'
-    replace: '0.0.0.0'
-
-- name: Start MongoDB
-  ansible.builtin.systemd:
-    name: mongod
-    state: started
-    enabled: true
+[mongodb-org-4.2]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+gpgcheck=0
+enabled=1
