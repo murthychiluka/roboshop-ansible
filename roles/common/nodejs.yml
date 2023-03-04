@@ -1,3 +1,3 @@
 - name: demo
   debug:
-   msg: nodejs
+    msg: nodejs
