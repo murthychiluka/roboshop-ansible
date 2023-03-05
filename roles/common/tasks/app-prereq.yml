@@ -2,12 +2,12 @@
    ansible.builtin.user:
       name: roboshop
 
- - name: delete old app dirctory
+ - name: delete old app directory
    ansible.builtin.file:
    path: /app
    state: absent
 
- - name: create app dirctory
+ - name: create app directory
    ansible.builtin.file:
    path: /app
    state: directory
