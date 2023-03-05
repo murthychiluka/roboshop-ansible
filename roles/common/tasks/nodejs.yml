@@ -15,7 +15,7 @@
   community.general.npm:
     path: /app/
 
-- name: Schema-setup
+- name: schema-setup
   ansible.builtin.import_tasks:
       file: schema-setup.yml     
       when: schema_type is defined   
