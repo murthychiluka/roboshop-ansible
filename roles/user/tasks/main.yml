@@ -1,5 +1,10 @@
-[mongodb-org-4.2]
-name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
-gpgcheck=0
-enabled=1
+# source common.sh
+# component=user
+# schema_type="mongo"
+# nodejs
+
+
+- name: Load NodeJS
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs
