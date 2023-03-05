@@ -2,15 +2,15 @@
    ansible.builtin.user:
       name: roboshop
 
- - name: delete old app directory
+ - name: Delete old app directory
    ansible.builtin.file:
-   path: /app
-   state: absent
+    path: /app
+    state: absent
 
- - name: create app directory
+ - name: Create app directory
    ansible.builtin.file:
-   path: /app
-   state: directory
+    path: /app
+    state: directory
 
  
  - name: Download and Extract {{ component }} Content
