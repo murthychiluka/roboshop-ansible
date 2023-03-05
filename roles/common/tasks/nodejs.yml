@@ -1,3 +1,34 @@
-- name: demo-Murthy
-  ansible.builtin.debug:
-    msg: nodejs
+# nodejs() {
+
+# print_head "Configure NodeJS Repo"
+# curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log_file}
+# status_check $?
+
+# print_head "Install NodeJS"
+# yum install nodejs -y &>>${log_file}
+# status_check $?
+
+# app_prereq_setup
+# print_head "Installing NodeJS Dependencies"
+# npm install &>>${log_file}
+# status_check $?
+
+- name: configure NodeJS repo
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: Install NodeJS
+  ansible.builtin.yum:
+   name: nodejs 
+   state: installed 
+
+ - name: App pre-requisites
+   ansible.builtin.import_tasks:
+      file: app-prereq.yaml
+ 
+ - name: Install NodeJS dependencies
+   community.general.npm:
+      ath: /app/
+
+#  - name: Schema-setup
+#    ansible.builtin.import_tasks:
+#       file: schema-setup.yml     
