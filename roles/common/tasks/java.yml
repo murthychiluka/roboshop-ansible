@@ -20,4 +20,3 @@
 - name: SystemD Setup
   ansible.builtin.import_tasks:
     file: systemd-setup.yml
-
