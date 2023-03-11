@@ -1,4 +1,4 @@
-- name: Download Prometheus Node Exporter
+- name: Download Prometheus node Exporter
   ansible.builtin.unarchive:
     src: "{{ exporter_url }}"
     dest: /opt
