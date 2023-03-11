@@ -1,2 +1,2 @@
 component: cart
-Node_exporter: true
+node_exporter: true
