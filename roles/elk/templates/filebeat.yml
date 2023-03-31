@@ -13,42 +13,41 @@
 # ============================== Filebeat inputs ===============================
 
 filebeat.inputs:
+  # Each - is an input. Most options can be set at the input level, so
+  # you can use different inputs for various configurations.
+  # Below are the input specific configurations.
 
-# Each - is an input. Most options can be set at the input level, so
-# you can use different inputs for various configurations.
-# Below are the input specific configurations.
+  # filestream is an input for collecting log messages from files.
+  - type: filestream
 
-# filestream is an input for collecting log messages from files.
-- type: filestream
+    # Unique ID among all inputs, an ID is required.
+    id: my-filestream-id
 
-  # Unique ID among all inputs, an ID is required.
-  id: my-filestream-id
+    # Change to true to enable this input configuration.
+    enabled: true
 
-  # Change to true to enable this input configuration.
-  enabled: true
+    # Paths that should be crawled and fetched. Glob based paths.
+    paths:
+      - { { log_file } }
 
-  # Paths that should be crawled and fetched. Glob based paths.
-  paths:
-    - {{ log_file }}
+      #- c:\programdata\elasticsearch\logs\*
 
-    #- c:\programdata\elasticsearch\logs\*
+    # Exclude lines. A list of regular expressions to match. It drops the lines that are
+    # matching any regular expression from the list.
+    #exclude_lines: ['^DBG']
 
-  # Exclude lines. A list of regular expressions to match. It drops the lines that are
-  # matching any regular expression from the list.
-  #exclude_lines: ['^DBG']
+    # Include lines. A list of regular expressions to match. It exports the lines that are
+    # matching any regular expression from the list.
+    #include_lines: ['^ERR', '^WARN']
 
-  # Include lines. A list of regular expressions to match. It exports the lines that are
-  # matching any regular expression from the list.
-  #include_lines: ['^ERR', '^WARN']
+    # Exclude files. A list of regular expressions to match. Filebeat drops the files that
+    # are matching any regular expression from the list. By default, no files are dropped.
+    #prospector.scanner.exclude_files: ['.gz$']
 
-  # Exclude files. A list of regular expressions to match. Filebeat drops the files that
-  # are matching any regular expression from the list. By default, no files are dropped.
-  #prospector.scanner.exclude_files: ['.gz$']
-
-  # Optional additional fields. These fields can be freely picked
-  # to add additional information to the crawled log files for filtering
-  fields:
-    component: {{ component }}
+    # Optional additional fields. These fields can be freely picked
+    # to add additional information to the crawled log files for filtering
+    fields:
+      component: { { component } }
 
 # ============================== Filebeat modules ==============================
 
@@ -68,7 +67,6 @@ setup.template.settings:
   index.number_of_shards: 1
   #index.codec: best_compression
   #_source.enabled: false
-
 
 # ================================== General ===================================
 
@@ -133,23 +131,21 @@ setup.kibana:
 
 # ---------------------------- Elasticsearch Output ----------------------------
 #output.elasticsearch:
-  # Array of hosts to connect to.
-  #hosts: ["localhost:9200"]
+# Array of hosts to connect to.
+#hosts: ["localhost:9200"]
 
-  # Protocol - either `http` (default) or `https`.
-  #protocol: "https"
+# Protocol - either `http` (default) or `https`.
+#protocol: "https"
 
-  # Authentication credentials - either API key or username/password.
-  #api_key: "id:api_key"
-  #username: "elastic"
-  #password: "changeme"
+# Authentication credentials - either API key or username/password.
+#api_key: "id:api_key"
+#username: "elastic"
+#password: "changeme"
 
 # ------------------------------ Logstash Output -------------------------------
 output.logstash:
   # The Logstash hosts
-  hosts: ["172.31.87.218:5044"]
-  
-
+  hosts: ["172.31.86.50:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
@@ -206,23 +202,22 @@ processors:
 
 # Instrumentation support for the filebeat.
 #instrumentation:
-    # Set to true to enable instrumentation of filebeat.
-    #enabled: false
+# Set to true to enable instrumentation of filebeat.
+#enabled: false
 
-    # Environment in which filebeat is running on (eg: staging, production, etc.)
-    #environment: ""
+# Environment in which filebeat is running on (eg: staging, production, etc.)
+#environment: ""
 
-    # APM Server hosts to report instrumentation results to.
-    #hosts:
-    #  - http://localhost:8200
+# APM Server hosts to report instrumentation results to.
+#hosts:
+#  - http://localhost:8200
 
-    # API Key for the APM Server(s).
-    # If api_key is set then secret_token will be ignored.
-    #api_key:
+# API Key for the APM Server(s).
+# If api_key is set then secret_token will be ignored.
+#api_key:
 
-    # Secret token for the APM Server(s).
-    #secret_token:
-
+# Secret token for the APM Server(s).
+#secret_token:
 
 # ================================= Migration ==================================
 
