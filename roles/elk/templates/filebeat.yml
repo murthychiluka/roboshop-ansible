@@ -28,7 +28,7 @@ filebeat.inputs:
 
     # Paths that should be crawled and fetched. Glob based paths.
     paths:
-      - { { log_file } }
+      "{{ log_file }}"
 
       #- c:\programdata\elasticsearch\logs\*
 
@@ -47,7 +47,7 @@ filebeat.inputs:
     # Optional additional fields. These fields can be freely picked
     # to add additional information to the crawled log files for filtering
     fields:
-      component: { { component } }
+      component: "{{ component }}"
 
 # ============================== Filebeat modules ==============================
 
