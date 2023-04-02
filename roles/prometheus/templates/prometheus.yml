@@ -13,15 +13,17 @@ alerting:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-{% for file in alert_files %}
-  - {{ file }}
-{% endfor %}
+  - "alerts.yml"
+  - "service-down-alerts.yml"
 
+# {% for file in alert_files %}
+#   - {{ file }}
+# {% endfor %}
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-  - job_name: 'roboshop-nodes'
+  - job_name: "roboshop-nodes"
     ec2_sd_configs:
       - region: us-east-1
         port: 9100
@@ -30,7 +32,5 @@ scrape_configs:
             values: ["yes"]
 
     relabel_configs:
-    - source_labels: [__meta_ec2_tag_Name]
-      target_label: name
-
-         
+      - source_labels: [__meta_ec2_tag_Name]
+        target_label: name
