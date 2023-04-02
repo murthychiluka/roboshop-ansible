@@ -15,26 +15,3 @@ groups:
           severity: critical
         annotations:
           summary: Server Down
-# groups:
-#   - name: Alerts
-#     rules:
-#       - alert: InstanceDown
-#         expr: up == 0
-#         for: 1m
-#         labels:
-#           severity: critical
-#         annotations:{% raw %}
-#           summary: "Instance Down - [{{ $labels.instance }}]"
-#           description: "Instance Down - [{{ $labels.instance }}]"{% endraw %}
-
-# {% for component in components %}
-#       - alert: ServiceDown-{{component}} component
-#         expr: node_systemd_unit_state{exported_name="{{component}}.service",state="active"} == 0
-#         for: 1m
-#         labels:
-#           severity: critical
-#         annotations:{% raw %}
-#           summary: "Service Down - [{{ $labels.exported_name }}]"
-#           description: "Service Down - [{{ $labels.exported_name }}]"{% endraw %}
-
-# {% endfor %}

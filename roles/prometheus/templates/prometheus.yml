@@ -10,20 +10,12 @@ alerting:
     - static_configs:
         - targets:
             - localhost:9093
-          # - alertmanager:9093
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
 {% for file in alert_files %}
   - {{ file }}
 {% endfor %}
-
-  - alerts.yml
-  # - "first_rules.yml"
-  # - "second_rules.yml"
-
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
@@ -38,8 +30,6 @@ scrape_configs:
 
     relabel_configs:
     - source_labels: [__meta_ec2_tag_Name]
-      target_label: name   
-
-
+      target_label: name
 
          
