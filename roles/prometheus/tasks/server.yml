@@ -1,4 +1,4 @@
-- name: Update prometheus configuration
+- name: Update Prometheus Configuration
   ansible.builtin.template:
     src: prometheus.yml
     dest: /opt/prometheus/prometheus.yml
@@ -7,7 +7,6 @@
   ansible.builtin.template:
     src: "{{ item }}"
     dest: /opt/prometheus/{{ item }}
-
   loop: "{{ alert_files }}"
 
 - name: Restart prometheus
