@@ -11,20 +11,23 @@
    ansible.builtin.file:
     path: /app
     state: directory
+## Download from Nexus
   
  - name: "Download and Extract {{ component }} Content"
    ansible.builtin.unarchive:
      src: http://{{ lookup('amazon.aws.aws_ssm', '{{env}}.nexus.user', region='us-east-1') }}:{{ lookup('amazon.aws.aws_ssm', '{{env}}.nexus.pass', region='us-east-1') }}@nexus.murthychiluka.online:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
+     http://3.238.144.249:8081/repository/cart/cart-1.0.0.zip
      dest: /app
      remote_src: yes
 
+## Download from S3
  
 #  - name: Download and Extract {{ component }} Content
 #    ansible.builtin.unarchive:
 #     src: https://roboshop-artifacts.s3.amazonaws.com/{{ component }}.zip
 #     dest: /app
 #     remote_src: yes  
-## Download from Nexus
+
 
  
 
