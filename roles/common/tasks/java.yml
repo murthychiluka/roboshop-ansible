@@ -3,7 +3,7 @@
 #     name: maven
 #     state: installed
 
-- name: Install Maven
+- name: Install Java
   ansible.builtin.yum:
     name: java-11-openjdk
     state: installed
