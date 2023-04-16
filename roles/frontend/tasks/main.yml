@@ -13,9 +13,19 @@
     path: /usr/share/nginx/html
     state: directory
 
-- name: Download and Extract Frontend Content
+# Download from S3
+
+# - name: Download and Extract Frontend Content
+#   ansible.builtin.unarchive:
+#     src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+#     dest: /usr/share/nginx/html
+#     remote_src: yes
+
+# Download from Nexus
+
+- name: Download and Extract {{ component }} Content
   ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+    src: http://{{ lookup('amazon.aws.aws_ssm', '{{env}}.nexus.user', region='us-east-1') }}:{{ lookup('amazon.aws.aws_ssm', '{{env}}.nexus.pass', region='us-east-1') }}@nexus.murthychiluka.online:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
     dest: /usr/share/nginx/html
     remote_src: yes
 
@@ -34,4 +44,3 @@
     name: nginx
     state: restarted
     enabled: yes
-
