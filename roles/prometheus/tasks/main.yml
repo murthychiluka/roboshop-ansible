@@ -6,4 +6,4 @@
 - name: node exporter
   ansible.builtin.import_tasks:
     file: exporter.yml
-  when: node_exporter  
+  when: node_exporter
